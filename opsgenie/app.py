@@ -51,9 +51,9 @@ def retrieve_oncall_users():
 
 
 # schedule the OpsGenie API call to be made every 60 minutes
-schedule.every(5).minutes.do(retrieve_oncall_users)
+schedule.every(60).minutes.do(retrieve_oncall_users)
 
 # run the scheduler indefinitely while sleeping at 10 minutes interval to avoid exhaustive CPU consumption
 while True:
     schedule.run_pending()
-    time.sleep(1) 
+    time.sleep(10*60) 
