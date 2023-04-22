@@ -20,5 +20,11 @@ To interact with Port using Gitlab CI Pipeline, you will first need to define yo
 3. Enter the necessary information into the form, include the Description, Interval Pattern, Timezone, Target branch and other variables specifically for the schedule.
 4. Click on **Save pipeline schedule** 
 
+#### Screenshot - Schedule
+![screenshot image](./assets/create_schedule_gitlab.PNG "Oncall Schedule Trigger in Gitlab")
 
-![screenshot image](./assets/create_schedule_gitlab.PNG "Oncall schedule Gitlab")
+#### Screenshot - Pipeline Success
+![screenshot image](./assets/pipeline.PNG "Successful Gitlab Pipeline Scheduled")
+
+#### Screenshot - Port UI
+![screenshot image](./assets/port_ui.PNG "Ingested Data in Port UI")
