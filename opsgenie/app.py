@@ -3,15 +3,32 @@ import requests
 from decouple import config
 import schedule
 import time
+import json
+import os
 
 
 # Get environment variables using the config object or os.environ["KEY"]
+# These are the credentials passed by the variables of your pipeline to your tasks and in to your env
 OPSGENIE_API_KEY = config("OPSGENIE_API_KEY")
-PORT_WEBHOOK_URL = config("PORT_WEBHOOK_URL")
+CLIENT_ID = config("PORT_CLIENT_ID")
+CLIENT_SECRET = config("PORT_CLIENT_SECRET")
 OPSGENIE_API_URL = "https://api.opsgenie.com/v2"
+PORT_API_URL = "https://api.getport.io/v1"
 
 
-def add_entity_to_port_webhook(entity_object):
+## Get Access Token
+credentials = {'clientId': CLIENT_ID, 'clientSecret': CLIENT_SECRET}
+token_response = requests.post(f'{PORT_API_URL}/auth/access_token', json=credentials)
+access_token = token_response.json()['accessToken']
+
+# You can now use the value in access_token when making further requests
+headers = {
+	'Authorization': f'Bearer {access_token}'
+}
+blueprint_id = 'opsGenieMicroservice'
+
+
+def add_entity_to_port(entity_object):
     """A function to create the passed entity in Port
 
     Params
@@ -24,7 +41,7 @@ def add_entity_to_port_webhook(entity_object):
     response: dict
         The response object after calling the webhook
     """
-    response = requests.post(PORT_WEBHOOK_URL, json=entity_object)
+    response = requests.post(f'{PORT_API_URL}/blueprints/{blueprint_id}/entities?upsert=true', json=entity_object, headers=headers)
     print(response.json())
 
 
@@ -42,18 +59,16 @@ def retrieve_oncall_users():
         data = on_call_response.json()["data"]["onCallParticipants"]
         for user in data:
             entity = {
-            "identifier": user["id"],
-            "title": schedule["name"],
-            "on_call": user["name"],
-            "user_type": user["type"]
-            }
-            add_entity_to_port_webhook(entity)
+                "identifier": user["id"],
+                "title": schedule["name"],
+                "properties": {
+                    "on_call_user": user["name"] if user["type"] == "user" else None,
+                    "on_call_team": user["name"] if ((user["type"] == "team") or (user["type"] == "escalation")) else None,
+                    "language": "GO",
+                    "url": "https://example.com"
+                },
+                "relations": {}
+                }
+            add_entity_to_port(entity)
 
-
-# schedule the OpsGenie API call to be made every 60 minutes
-schedule.every(60).minutes.do(retrieve_oncall_users)
-
-# run the scheduler indefinitely while sleeping at 10 minutes interval to avoid exhaustive CPU consumption
-while True:
-    schedule.run_pending()
-    time.sleep(10*60) 
+retrieve_oncall_users()

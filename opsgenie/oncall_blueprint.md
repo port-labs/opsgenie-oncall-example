@@ -1,30 +1,55 @@
 ```json showLineNumbers
 {
-    "identifier": "opsgenie_oncall",
-    "description": "This blueprint represents an OpsGenie on-call user in our software catalog",
-    "title": "OpsGenie Oncall",
-    "icon": "OpsGenie",
-    "schema": {
-      "properties": {
-        "on_call": {
-          "title": "Oncall User",
-          "type": "string",
-          "format": "user"
-        },
-        "user_type": {
-          "title": "User Type",
-          "type": "string",
-          "enum": [
-            "user",
-            "team",
-            "escalation"
-          ]
+  "identifier": "opsGenieMicroservice",
+  "description": "This blueprint represents an OpsGenie on-call service in our software catalog",
+  "title": "OpsGenie Service",
+  "icon": "Microservice",
+  "schema": {
+    "properties": {
+      "on_call_user": {
+        "type": "string",
+        "icon": "Okta",
+        "title": "On Call User",
+        "format": "email",
+        "default": "developer@getport.io"
+      },
+      "on_call_team": {
+        "type": "string",
+        "icon": "Okta",
+        "title": "On Call Team",
+        "default": "Developer Team"
+      },
+      "language": {
+        "type": "string",
+        "icon": "Git",
+        "title": "Language",
+        "default": "Node",
+        "enum": [
+          "GO",
+          "Python",
+          "Node"
+        ],
+        "enumColors": {
+          "GO": "red",
+          "Python": "green",
+          "Node": "blue"
         }
       },
-      "required": []
+      "url": {
+        "type": "string",
+        "title": "Github URL",
+        "icon": "Github",
+        "format": "url",
+        "default": "https://git.com",
+        "description": "the link to the repo in our github"
+      }
     },
-    "mirrorProperties": {},
-    "calculationProperties": {},
-    "relations": {}
-  }
+    "required": [
+      "on_call_user"
+    ]
+  },
+  "mirrorProperties": {},
+  "calculationProperties": {},
+  "relations": {}
+}
 ```
