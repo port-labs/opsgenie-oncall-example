@@ -23,4 +23,3 @@ ingest_opsgenie_data_to_port_job:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: always
-  cron: "*/10 * * * *"
