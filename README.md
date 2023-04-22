@@ -6,12 +6,19 @@
 This document describes my approach to creating integrations between Port and OpsGenie's `who is on call` using REST API. 
 
 ### Oncall blueprint
-[Open this file ](./opsgenie/oncall_blueprint.md)
+Create the oncall blueprint in Port [using this json file ](./opsgenie/oncall_blueprint.md)
 
-### Oncall webhook configuration
-[Open this file ](./opsgenie/oncall_webhook_configuration.md)
+### Gitlab CI yaml
+Place this example `.gitlab-ci.yml` file in your project's root folder
 
-### Ingesting on call data to Port
-[Run the app.py python file ](./opsgenie/app.py)
+### Gitlab CI Variables
+To interact with Port using Gitlab CI Pipeline, you will first need to define your Port credentials [as variables for your pipeline](https://docs.gitlab.com/ee/ci/variables/index.html#define-a-cicd-variable-in-the-ui). Then, pass the defined variables to your ci pipeline script. Ensure to add your OpsGenie API key as well to the variables.
 
-![screenshot image](./assets/oncall_entities.PNG "Oncall entity in Port UI")
+### Schedule the script
+1. Go to your Gitlab project and select CI/CD
+2. Click on **Schedules** and create new schedule
+3. Enter the necessary information into the form, include the Description, Interval Pattern, Timezone, Target branch and other variables specifically for the schedule.
+4. Click on **Save pipeline schedule** 
+
+
+![screenshot image](./assets/create_schedule_gitlab.PNG "Oncall schedule Gitlab")

@@ -65,7 +65,7 @@ def retrieve_oncall_users():
                     "on_call_user": user["name"] if user["type"] == "user" else None,
                     "on_call_team": user["name"] if ((user["type"] == "team") or (user["type"] == "escalation")) else None,
                     "language": "GO",
-                    "url": "https://example.com"
+                    "url": config("CI_PROJECT_URL")
                 },
                 "relations": {}
                 }
