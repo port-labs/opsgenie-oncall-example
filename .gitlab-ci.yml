@@ -18,8 +18,6 @@ ingest_opsgenie_data_to_port_job:
   script:
     - echo "Getting OpsGenie on-call users"
     - python opsgenie/app.py
-  only:
-    - schedules
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: always
