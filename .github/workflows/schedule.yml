@@ -2,7 +2,7 @@ name: Schedule Workflow
 
 on:
   schedule:
-    - cron: '/5 * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   ingest_opsgenie_data_to_port_job:
