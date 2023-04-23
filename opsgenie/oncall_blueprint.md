@@ -1,9 +1,9 @@
 ```json showLineNumbers
 {
-  "identifier": "opsGenieMicroservice",
-  "description": "This blueprint represents an OpsGenie on-call service in our software catalog",
-  "title": "OpsGenie Service",
-  "icon": "Microservice",
+  "identifier": "service",
+  "description": "This blueprint represents a service in our software catalog",
+  "title": "Service",
+  "icon": "Service",
   "schema": {
     "properties": {
       "on_call_user": {
@@ -37,11 +37,11 @@
       },
       "url": {
         "type": "string",
-        "title": "Github URL",
-        "icon": "Github",
+        "title": "GitLab URL",
+        "icon": "GitLab",
         "format": "url",
-        "default": "https://git.com",
-        "description": "the link to the repo in our github"
+        "default": "https://gitlab.com",
+        "description": "the link to the repo in our GitLab"
       }
     },
     "required": [

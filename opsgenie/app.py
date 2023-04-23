@@ -1,10 +1,6 @@
 ## Import the needed libraries
 import requests
 from decouple import config
-import schedule
-import time
-import json
-import os
 
 
 # Get environment variables using the config object or os.environ["KEY"]
@@ -25,7 +21,7 @@ access_token = token_response.json()['accessToken']
 headers = {
 	'Authorization': f'Bearer {access_token}'
 }
-blueprint_id = 'opsGenieMicroservice'
+blueprint_id = 'service'
 
 
 def add_entity_to_port(entity_object):
@@ -41,7 +37,7 @@ def add_entity_to_port(entity_object):
     response: dict
         The response object after calling the webhook
     """
-    response = requests.post(f'{PORT_API_URL}/blueprints/{blueprint_id}/entities?upsert=true', json=entity_object, headers=headers)
+    response = requests.post(f'{PORT_API_URL}/blueprints/{blueprint_id}/entities?upsert=true&merge=true', json=entity_object, headers=headers)
     print(response.json())
 
 
@@ -63,9 +59,7 @@ def retrieve_oncall_users():
                 "title": schedule["name"],
                 "properties": {
                     "on_call_user": user["name"] if user["type"] == "user" else None,
-                    "on_call_team": user["name"] if ((user["type"] == "team") or (user["type"] == "escalation")) else None,
-                    "language": "GO",
-                    "url": config("CI_PROJECT_URL")
+                    "on_call_team": user["name"] if ((user["type"] == "team") or (user["type"] == "escalation")) else None
                 },
                 "relations": {}
                 }
