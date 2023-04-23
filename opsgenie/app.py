@@ -58,8 +58,8 @@ def retrieve_oncall_users():
                 "identifier": user["id"],
                 "title": schedule["name"],
                 "properties": {
-                    "on_call_user": user["name"] if user["type"] == "user" else None,
-                    "on_call_team": user["name"] if ((user["type"] == "team") or (user["type"] == "escalation")) else None
+                    "on_call_user": user["name"] if user["type"] == "user" else "developer@getport.io",
+                    "on_call_team": user["name"] if ((user["type"] == "team") or (user["type"] == "escalation")) else "Developer Team"
                 },
                 "relations": {}
                 }
