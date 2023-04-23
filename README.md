@@ -6,7 +6,7 @@
 In this example you will create a blueprint for `service` entity that ingests `who is on call` data from OpsGenie using REST API. Then you will add some Python code to create new entities in Port every time a Gitlab Pipeline is triggered by a schedule.
 
 ### Service Blueprint
-Create the `service' blueprint in Port [using this json file ](./opsgenie/oncall_blueprint.md)
+Create the `service` blueprint in Port [using this json file ](./opsgenie/oncall_blueprint.md)
 
 ### Gitlab CI yaml
 Place this example `.gitlab-ci.yml` file in your project's root folder
