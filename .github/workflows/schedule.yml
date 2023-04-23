@@ -26,6 +26,6 @@ jobs:
           PORT_CLIENT_SECRET: ${{ secrets.PORT_CLIENT_SECRET }}
           OPSGENIE_API_KEY: ${{ secrets.OPSGENIE_API_KEY }}
         run: |
-          echo "Getting OpsGenie on-call users"
+          echo "Getting OpsGenie oncall users"
           python opsgenie/app.py
     if: github.event_name == 'schedule'
