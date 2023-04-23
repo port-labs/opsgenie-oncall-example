@@ -2,7 +2,7 @@ name: Schedule OpsGenie Oncall Workflow
 
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '0 0 * * *'
 
 jobs:
   ingest_opsgenie_data_to_port_job:
